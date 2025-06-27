@@ -35,6 +35,31 @@
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
+                <!-- Notifications Dropdown Menu -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <i class="far fa-bell"></i>
+                        @if(Auth::user()->unreadNotifications->count() > 0)
+                        <span class="badge badge-warning navbar-badge">{{ Auth::user()->unreadNotifications->count() }}</span>
+                        @endif
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                        <span class="dropdown-header">{{ Auth::user()->unreadNotifications->count() }} Notifications</span>
+                        <div class="dropdown-divider"></div>
+                        @forelse(Auth::user()->unreadNotifications as $notification)
+                            <a href="{{ $notification->data['url'] ?? '#' }}" class="dropdown-item">
+                                <i class="fas fa-file mr-2"></i> {{ $notification->data['message'] }}
+                                <span class="float-right text-muted text-sm">{{ $notification->created_at->diffForHumans() }}</span>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                        @empty
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-bell-slash mr-2"></i> Aucune nouvelle notification
+                            </a>
+                        @endforelse
+                        <a href="#" class="dropdown-item dropdown-footer">Voir toutes les notifications</a>
+                    </div>
+                </li>
                 <li class="nav-item dropdown user-menu">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                         <span>{{ Auth::user()->name }}</span>
@@ -61,7 +86,7 @@
         
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="{{ route('employe.dashboard') }}" class="brand-link">
+            <a href="{{ route('employes.dashboard') }}" class="brand-link">
                 <span class="brand-text font-weight-light">CongeApp</span>
             </a>
 
@@ -71,13 +96,13 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
                         <li class="nav-item">
-                            <a href="{{ route('employe.dashboard') }}" class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+                            <a href="{{ route('employes.dashboard') }}" class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-home"></i>
                                 <p>Acceuil</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('employe.conge.index')}}" class="nav-link">
+                            <a href="{{route('employes.conge.index')}}" class="nav-link">
                                 <i class="nav-icon fas fa-calendar-alt"></i>
                                 <p>Mes Conges</p>
                             </a>

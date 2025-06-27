@@ -14,7 +14,7 @@
                     @endif
 
                     @if(isset($employe))
-                        <form action="{{ route('admin.employe.update', $employe->id)}}" method="POST">
+                        <form action="{{ route('admin.employes.update', $employe->id)}}" method="POST">
                             @csrf
                             @method('PUT')
 

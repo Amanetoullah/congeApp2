@@ -37,7 +37,7 @@ class LoginController extends Controller
             if ($user->hasRole('admin')) {
                 return redirect()->route('admin.dashboard');
             } elseif ($user->hasRole('employee')) {
-                return redirect()->route('employe.dashboard');
+                return redirect()->route('employes.dashboard');
             } else {
                 Auth::logout(); // optionally force logout unknown roles
                 return redirect('/')->withErrors(['email' => 'Unauthorized role.']);

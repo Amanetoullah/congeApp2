@@ -16,13 +16,13 @@ class EmployeSeeder extends Seeder
     public function run()
     {
         $departement = Departement::create([
-            'name' => 'Math',
+            'name' => 'IT',
         ]);
         $departement = Departement::create([
-            'name' => 'Physics',
+            'name' => 'Marketing et Ventes',
         ]);
         $departement = Departement::create([
-            'name' => 'Chemistry',
+            'name' => 'Finance et comptabilite',
         ]);
       $user=  User::create([
             'name' => 'admin',
