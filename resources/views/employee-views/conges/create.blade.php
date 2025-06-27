@@ -24,7 +24,7 @@
 
                                     <option value="vacances"> Vacances</option>
                                     <option value="maladie">Maladie</option>
-                                    <option value="télétravail">Exceptionnel</option>
+                                    <option value="Exceptionnel">Exceptionnel</option>
 
                                     
                                 </select>

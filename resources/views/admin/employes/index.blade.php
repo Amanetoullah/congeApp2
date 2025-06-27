@@ -17,14 +17,7 @@
                 <div class="card my-5 shadow-lg">
                     <div class="card-header d-flex align-items-center">
                         {{--<h4 class="font-weight-bold text-uppercase m-0">Employés</h4>--}}
-                        <div class="input-group mb-3" style="max-width: 250px;">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text bg-primary text-white">
-                                    <i class="fas fa-search"></i>
-                                </span>
-                            </div>
-                            <input type="text" id="searchBox" class="form-control" placeholder="Rechercher un employé...">
-                        </div>
+                        
                         
                         
                         

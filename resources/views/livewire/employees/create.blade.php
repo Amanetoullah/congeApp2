@@ -3,16 +3,16 @@
                               method="POST" class="mt-3">
 
                               <div class="form-group mb-3">
-                                <label for="registration_number">Registration Number</label>
+                                <label for="registration_number">Numéro d’enregistrement </label>
                                 <input type="text" class="form-control"
-                                name="registration_number" placeholder="Registration Number"
+                                name="registration_number" placeholder="Numéro d’enregistrement"
                                 wire:model="registration_number">
                                 @error('registration_number') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                             <div class="form-group mb-3">
-                                <label for="name">Full Name</label>
+                                <label for="name">Nom Complet</label>
                                 <input type="text" class="form-control"
-                                name="name" placeholder="Full Name"
+                                name="name" placeholder="Nom Complet"
                                 wire:model="name">
                                 @error('name') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
@@ -41,7 +41,7 @@
                             <div class="form-group mb-3">
                                 <label for="departement">Departement</label>
                                 <select class="form-control" wire:model="departement">
-                                    <option value="">Select Departement</option>
+                                    <option value=""> Sélectionner un département </option>
                                     @foreach ($departements as $departement)
                                         <option value="{{ $departement->id }}">{{ $departement->name }}</option>
                                     @endforeach
@@ -49,30 +49,30 @@
                                 @error('departement') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                             <div class="form-group mb-3">
-                                <label for="hire_date">Hire Date</label>
+                                <label for="hire_date">Date Embauche</label>
                                 <input type="date" class="form-control"
-                                name="hire_date" placeholder="Hire Date"
+                                name="hire_date" placeholder="Date Embauche"
                                 wire:model="hire_date">
                                 @error('hire_date') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                             <div class="form-group mb-3">
-                                <label for="phone">Phone</label>
+                                <label for="phone">telephone</label>
                                 <input type="tel" class="form-control"
-                                name="phone" placeholder="Phone"
+                                name="phone" placeholder="telephone"
                                 wire:model="phone">
                                 @error('phone') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                             <div class="form-group mb-3">
-                                <label for="address">Address</label>
+                                <label for="address">Adresse</label>
                                 <input type="text" class="form-control"
-                                name="address" placeholder="Address"
+                                name="address" placeholder="Adresse"
                                 wire:model="address">
                                 @error('address') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                             <div class="form-group mb-3">
-                                <label for="city">City</label>
+                                <label for="city">Ville</label>
                                 <input type="text" class="form-control"
-                                name="city" placeholder="City"
+                                name="city" placeholder="Ville"
                                 wire:model="city">
                                 @error('city') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
@@ -80,7 +80,7 @@
 
                                 <button type="submit" class="btn btn-primary">
                                     <span wire:loading wire:target="store" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                    Submit
+                                    Enregistrer
                                 </button>
                             </div>
 

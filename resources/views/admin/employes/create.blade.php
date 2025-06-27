@@ -9,14 +9,14 @@
 @endsection
 
 @section('content')
-<div class="container mt-5">
+<div class="container mt-2">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card shadow-lg border-0">
-                <div class="card-header bg-primary text-white text-center">
-                    <h4>📝 Ajouter un Employé</h4>
+        <div class="col-md-6"> {{-- Réduction de la largeur --}}
+            <div class="card shadow-sm border-0"> {{-- Moins de shadow --}}
+                <div class="card-header bg-primary text-white text-center py-2"> {{-- Réduction padding vertical --}}
+                    <h5 class="mb-0">📝 Ajouter un Employé</h5> {{-- Plus petit titre --}}
                 </div>
-                <div class="card-body p-4">
+                <div class="card-body p-2"> {{-- Réduction padding intérieur --}}
                     @include('layouts.alert')
                     <livewire:employees.create />
                 </div>
