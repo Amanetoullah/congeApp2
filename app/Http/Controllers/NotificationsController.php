@@ -9,10 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class NotificationsController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    
 
     /**
      * Display the notifications page

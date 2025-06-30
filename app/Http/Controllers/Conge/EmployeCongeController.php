@@ -41,6 +41,7 @@ class EmployeCongeController extends Controller
             'date_fin' => 'required|date|after_or_equal:date_debut',
             'justificatif' => 'nullable|file|mimes:pdf,jpg,jpeg,png,doc,docx|max:5120', // 5MB max
             'motif' => 'nullable|string|max:500',
+            'confirmation' => 'required',
         ], [
             'type.required' => 'Le type de congé est requis.',
             'type.in' => 'Le type de congé sélectionné n\'est pas valide.',
@@ -52,6 +53,7 @@ class EmployeCongeController extends Controller
             'justificatif.mimes' => 'Le justificatif doit être au format PDF, JPG, PNG, DOC ou DOCX.',
             'justificatif.max' => 'Le justificatif ne doit pas dépasser 5MB.',
             'motif.max' => 'Le motif ne doit pas dépasser 500 caractères.',
+            'confirmation.required' => 'Vous devez confirmer que les informations sont exactes.',
         ]);
 
         DB::beginTransaction();

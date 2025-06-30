@@ -40,18 +40,6 @@ class CongeController extends Controller
             // Envoyer la notification
             $conge->user->notify(new CongeStatusNotification($conge));
 
-            // Envoyer l'email
-            try {
-                Mail::queue(new EmployeCongeMail(
-                    $conge->user,
-                    $conge->statut,
-                    $conge->remarque ?? 'Demande refusée par l\'administrateur',
-                    route('employes.conge.index')
-                ));
-            } catch (\Exception $e) {
-                Log::error('Erreur lors de l\'envoi de l\'email de refus: ' . $e->getMessage());
-            }
-
             DB::commit();
 
             return redirect()->back()->with('success', 'Demande de congé refusée avec succès.');
@@ -84,18 +72,6 @@ class CongeController extends Controller
 
             // Envoyer la notification
             $conge->user->notify(new CongeStatusNotification($conge));
-
-            // Envoyer l'email
-            try {
-                Mail::queue(new EmployeCongeMail(
-                    $conge->user,
-                    $conge->statut,
-                    $conge->remarque ?? 'Demande approuvée par l\'administrateur',
-                    route('employes.conge.index')
-                ));
-            } catch (\Exception $e) {
-                Log::error('Erreur lors de l\'envoi de l\'email d\'approbation: ' . $e->getMessage());
-            }
 
             DB::commit();
 

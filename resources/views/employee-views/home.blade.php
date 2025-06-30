@@ -104,7 +104,8 @@
                             <h3 class="mb-1">{{ auth()->user()->unreadNotifications()->count() }}</h3>
                             <p class="mb-2 opacity-75">Notifications non lues</p>
                             <a href="{{ route('notifications.index') }}" class="btn btn-light btn-sm">
-                                <i class="fas fa-eye mr-1"></i>Voir toutes 
+                                <i class="fas fa-eye mr-1"></i>
+                                Voir toutes 
                             </a>
                         </div>
                     </div>

@@ -49,7 +49,7 @@ class CongeStatusNotification extends Notification
         return [
             'conge_id' => $this->conge->id,
             'message' => $message,
-            'url' => route('employe.conge.index'),
+            'url' => route('employes.conge.index'),
         ];
     }
 }

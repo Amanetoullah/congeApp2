@@ -157,24 +157,32 @@
                         </div>
 
                         <!-- Submit Section -->
-                        <div class="mt-4">
-                            <div class="form-check mb-2">
-                                <input class="form-check-input" type="checkbox" id="confirmCheck">
-                                <label class="form-check-label small" for="confirmCheck">
-                                    <i class="fas fa-check-circle mr-1"></i>
-                                    Je confirme que les informations sont exactes
-                                </label>
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <small class="text-muted" id="validationMessage">
-                                    <i class="fas fa-info-circle mr-1"></i>
-                                    Remplissez les champs obligatoires
-                                </small>
-                                <button type="submit" class="btn btn-primary btn-sm" id="submitBtn">
-                                    <i class="fas fa-paper-plane mr-1"></i>
-                                    <span id="submitText">Envoyer</span>
-                                    <span id="submitSpinner" class="spinner-border spinner-border-sm ml-1 d-none"></span>
-                                </button>
+
+                        <div class="form-section">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="confirmCheck" name="confirmation">
+                                            <label class="form-check-label" for="confirmCheck">
+                                                <i class="fas fa-check-circle mr-1"></i>
+                                                Je confirme que les informations fournies sont exactes
+                                            </label>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary btn-lg" id="submitBtn" >
+                                            <i class="fas fa-paper-plane mr-2"></i>
+                                            <span id="submitText">Envoyer la demande</span>
+                                            <span id="submitSpinner" class="spinner-border spinner-border-sm ml-2 d-none"></span>
+                                        </button>
+                                    </div>
+                                    <div class="mt-3">
+                                        <small class="text-muted" id="validationMessage">
+                                            <i class="fas fa-info-circle mr-1"></i>
+                                            Pour activer le bouton, veuillez remplir les champs obligatoires et cocher la case de confirmation.
+                                        </small>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </form>
@@ -222,7 +230,173 @@
 <!-- Le même script JavaScript que dans votre version originale -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+<<<<<<< HEAD
     // ... (conservez tout le code JavaScript original)
+=======
+    const dateDebut = document.getElementById('date_debut');
+    const dateFin = document.getElementById('date_fin');
+    const durationText = document.getElementById('durationText');
+    const motif = document.getElementById('motif');
+    const charCount = document.getElementById('charCount');
+    const confirmCheck = document.getElementById('confirmCheck');
+    const submitBtn = document.getElementById('submitBtn');
+    const submitText = document.getElementById('submitText');
+    const submitSpinner = document.getElementById('submitSpinner');
+    const typeSelect = document.getElementById('type');
+
+    // Calculate duration
+    function calculateDuration() {
+        if (dateDebut.value && dateFin.value) {
+            const start = new Date(dateDebut.value);
+            const end = new Date(dateFin.value);
+            const diffTime = Math.abs(end - start);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+            
+            if (end < start) {
+                durationText.innerHTML = '<i class="fas fa-exclamation-triangle text-warning mr-1"></i>Date de fin doit être après la date de début';
+                durationText.className = 'text-warning';
+            } else {
+                durationText.innerHTML = `<i class="fas fa-calendar-day text-info mr-1"></i>Durée: ${diffDays} jour(s)`;
+                durationText.className = 'text-info';
+            }
+        } else {
+            durationText.innerHTML = '<i class="fas fa-info-circle text-info mr-1"></i>Durée: Sélectionnez les dates';
+            durationText.className = 'text-info';
+        }
+    }
+
+    // Character count for motif
+    function updateCharCount() {
+        const count = motif.value.length;
+        charCount.textContent = count;
+        if (count > 450) {
+            charCount.className = 'text-warning';
+        } else {
+            charCount.className = 'text-muted';
+        }
+    }
+
+    // Enable/disable submit button - Simplified validation
+    function updateSubmitButton() {
+        const hasDates = dateDebut.value && dateFin.value;
+        const hasType = typeSelect.value && typeSelect.value.trim() !== '';
+        const isConfirmed = confirmCheck.checked;
+        const validationMessage = document.getElementById('validationMessage');
+        
+        // Check if dates are valid (end date after start date)
+        let datesValid = false;
+        if (hasDates) {
+            const start = new Date(dateDebut.value);
+            const end = new Date(dateFin.value);
+            datesValid = end >= start;
+        }
+        
+        // Enable button if we have type, valid dates and confirmation
+        const shouldEnable = hasType && hasDates && datesValid && isConfirmed;
+        
+        submitBtn.disabled = !shouldEnable;
+        
+        // Update button appearance
+        if (shouldEnable) {
+            submitBtn.classList.remove('btn-secondary');
+            submitBtn.classList.add('btn-primary');
+            validationMessage.innerHTML = '<i class="fas fa-check-circle text-success mr-1"></i>Formulaire complet ! Vous pouvez envoyer votre demande.';
+            validationMessage.className = 'text-success';
+        } else {
+            submitBtn.classList.remove('btn-primary');
+            submitBtn.classList.add('btn-secondary');
+            
+            // Provide specific feedback
+            if (!hasType) {
+                validationMessage.innerHTML = '<i class="fas fa-info-circle text-info mr-1"></i>Veuillez sélectionner un type de congé.';
+                validationMessage.className = 'text-info';
+            } else if (!hasDates) {
+                validationMessage.innerHTML = '<i class="fas fa-info-circle text-info mr-1"></i>Veuillez sélectionner les dates de début et de fin.';
+                validationMessage.className = 'text-info';
+            } else if (!datesValid) {
+                validationMessage.innerHTML = '<i class="fas fa-exclamation-triangle text-warning mr-1"></i>La date de fin doit être après la date de début.';
+                validationMessage.className = 'text-warning';
+            } else if (!isConfirmed) {
+                validationMessage.innerHTML = '<i class="fas fa-info-circle text-info mr-1"></i>Veuillez confirmer que les informations sont exactes.';
+                validationMessage.className = 'text-info';
+            } else {
+                validationMessage.innerHTML = '<i class="fas fa-info-circle text-info mr-1"></i>Veuillez remplir tous les champs obligatoires.';
+                validationMessage.className = 'text-info';
+            }
+        }
+        
+        // Debug info (remove in production)
+        console.log('Validation:', {
+            hasType: hasType,
+            hasDates: hasDates,
+            datesValid: datesValid,
+            isConfirmed: isConfirmed,
+            shouldEnable: shouldEnable
+        });
+    }
+
+    // Event listeners
+    dateDebut.addEventListener('change', function() {
+        if (this.value) {
+            dateFin.min = this.value;
+        }
+        calculateDuration();
+        updateSubmitButton();
+    });
+
+    dateFin.addEventListener('change', function() {
+        calculateDuration();
+        updateSubmitButton();
+    });
+
+    typeSelect.addEventListener('change', function() {
+        updateSubmitButton();
+    });
+
+    confirmCheck.addEventListener('change', function() {
+        if (this.checked) {
+            this.parentElement.classList.add('text-success');
+        } else {
+            this.parentElement.classList.remove('text-success');
+        }
+        updateSubmitButton();
+    });
+
+    motif.addEventListener('input', updateCharCount);
+
+    // Form submission
+    document.getElementById('leaveForm').addEventListener('submit', function(e) {
+        // Final validation before submission
+        const hasDates = dateDebut.value && dateFin.value;
+        const hasType = typeSelect.value && typeSelect.value.trim() !== '';
+        const isConfirmed = confirmCheck.checked;
+        
+        if (!hasDates || !hasType || !isConfirmed) {
+            e.preventDefault();
+            alert('Veuillez remplir tous les champs obligatoires et confirmer les informations.');
+            return;
+        }
+        
+        // Check date validity
+        const start = new Date(dateDebut.value);
+        const end = new Date(dateFin.value);
+        if (end < start) {
+            e.preventDefault();
+            alert('La date de fin doit être après la date de début.');
+            return;
+        }
+        
+        // Show loading state
+        submitBtn.disabled = true;
+        submitText.textContent = 'Envoi en cours...';
+        submitSpinner.classList.remove('d-none');
+    });
+
+    // Initialize
+    calculateDuration();
+    updateCharCount();
+    updateSubmitButton();
+>>>>>>> 19313525114c9a183f9273da01af7c256d60ee30
 });
 </script>
 @endsection
